@@ -1,21 +1,26 @@
 import "./Home.css";
 import { Nav } from "../../components/index.ts";
+import { StyledButton, StyledOverlay } from "../../styles/styledComponents";
 
 const Home = () => {
-  const authToken: boolean = true;
+  const authToken: boolean = false;
 
   const handleClick = () => {
     console.log("Clicked!");
   };
 
   return (
-    <div className="home">
-      <Nav />
-      <h1>Swipe Right</h1>
-      <button className="primary-button" onClick={handleClick}>
-        {authToken ? "Sign-Out" : "Create Account"}
-      </button>
-    </div>
+    <>
+      <StyledOverlay>
+        <Nav minimal={true} authToken={authToken} />
+        <div className="home">
+          <h1>Swipe Right</h1>
+          <StyledButton $primary onClick={handleClick}>
+            {authToken ? "Sign-Out" : "Create Account"}
+          </StyledButton>
+        </div>
+      </StyledOverlay>
+    </>
   );
 };
 
