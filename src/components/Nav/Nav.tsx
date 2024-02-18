@@ -5,9 +5,14 @@ import { StyledNavButton } from "../../styles/styledComponents";
 interface NavProps {
   minimal: boolean;
   authToken: boolean;
+  setShowModal: (showModal: boolean) => void;
 }
 
-const Nav = ({ minimal, authToken }: NavProps) => {
+const Nav = ({ minimal, authToken, setShowModal }: NavProps) => {
+  const handleClick = () => {
+    setShowModal(true);
+  };
+
   return (
     <nav>
       <figure className="logo-container">
@@ -17,8 +22,11 @@ const Nav = ({ minimal, authToken }: NavProps) => {
           alt="logo-image"
         />
       </figure>
-      {!authToken && (
-        <StyledNavButton className="nav-button">Log In</StyledNavButton>
+
+      {!authToken && !minimal && (
+        <StyledNavButton className="nav-button" onClick={handleClick}>
+          Log In
+        </StyledNavButton>
       )}
     </nav>
   );
