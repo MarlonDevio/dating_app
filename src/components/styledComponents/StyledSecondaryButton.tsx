@@ -6,5 +6,6 @@ const StyledSecondaryButton = styled(StyledButton)`
   font-size: 1.5rem;
   border: 2px solid var(--color-tertiary-dark);
   margin: 6px;
+  background: white;
 `;
 export default StyledSecondaryButton;

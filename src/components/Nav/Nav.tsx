@@ -1,17 +1,19 @@
 import "./Nav.css";
 import { logoColor, logoWhite } from "../../assets/images";
-import { StyledNavButton } from "../../styles/styledComponents";
+import { StyledNavButton } from "../styledComponents";
 
 interface NavProps {
   minimal: boolean;
-  authToken: boolean;
+  authToken?: boolean;
   setShowModal: (showModal: boolean) => void;
   showModal: boolean;
+  setIsSignUp?: (isSignUp: boolean) => void;
 }
 
 const Nav = (props: NavProps) => {
   const handleClick = () => {
     props.setShowModal(true);
+    if (props.setIsSignUp) props.setIsSignUp(false);
   };
 
   return (
@@ -19,8 +21,9 @@ const Nav = (props: NavProps) => {
       <figure className="logo-container">
         <img
           className="logo"
-          src={props.minimal ? logoWhite : logoColor}
+          src={props.minimal ? logoColor : logoWhite}
           alt="logo-image"
+          // style={{ position: "relative", zIndex: 1000 }}
         />
       </figure>
 

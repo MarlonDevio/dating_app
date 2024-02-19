@@ -3,11 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 17.5rem;
-
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 36rem;
+    gap: 2rem;
+    top: 10rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 36rem;
     height: 60rem;
     background-color: #fff;
     border-radius: 1rem;

@@ -1,6 +1,6 @@
 import "./Form.css";
 import { FormEvent } from "react";
-import { StyledSecondaryButton } from "../../styles/styledComponents";
+import { StyledSecondaryButton } from "../styledComponents";
 
 interface FormProps {
   email: string;
@@ -12,6 +12,7 @@ interface FormProps {
   error: string;
   setError: (error: string) => void;
   handleSubmit: (e: FormEvent) => void;
+  isSignUp: boolean;
 }
 
 const Form = ({ ...FormProps }: FormProps) => {
@@ -33,17 +34,20 @@ const Form = ({ ...FormProps }: FormProps) => {
         required={true}
         onChange={(e) => FormProps.setPassword(e.target.value)}
       />
-      <input
-        type="password"
-        id="password-check"
-        name="password-check"
-        placeholder="confirm password"
-        required={true}
-        onChange={(e) => FormProps.setConfirmPassword(e.target.value)}
-      />
+      {FormProps.isSignUp && (
+        <input
+          type="password"
+          id="password-check"
+          name="password-check"
+          placeholder="confirm password"
+          required={true}
+          onChange={(e) => FormProps.setConfirmPassword(e.target.value)}
+        />
+      )}
 
       <StyledSecondaryButton as="input" type="submit" />
       <p>{FormProps.error}</p>
+      <hr style={{ width: "100%", marginTop: "2rem" }} />
     </form>
   );
 };

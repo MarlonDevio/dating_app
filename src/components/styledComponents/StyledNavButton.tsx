@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 const StyledNavButton = styled.button`
   color: var(--color-primary);
-  background-color: var(--color-tertiary);
+  background-color: white;
   font-size: 2rem;
   padding: 1rem 2rem;
   border-radius: 1rem;
   border: none;
+  align-self: center;
 
   &:hover {
     cursor: pointer;
+    background-color: var(--color-tertiary);
   }
 
   &:disabled {

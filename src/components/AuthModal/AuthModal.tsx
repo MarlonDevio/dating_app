@@ -1,28 +1,44 @@
-import { CloseButton, Form } from "..";
-import "./AuthModal.css";
-import { FormEvent, useState } from "react";
-import { StyledButton } from "../../styles/styledComponents";
+import { CloseButton, Form } from '..';
+import './AuthModal.css';
+import { FormEvent, useState } from 'react';
 
 interface AuthModalProps {
   setShowModal: (showModal: boolean) => void;
+  isSignUp: boolean;
+  // setIsSignUp?: (isSignUp: boolean) => void;
 }
 
-const AuthModal = ({ setShowModal }: AuthModalProps) => {
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+/**
+ * AuthModal component displays a modal for user authentication.
+ *
+ * @component
+ * @param {AuthModalProps} props - The props for the AuthModal component.
+ * @returns {JSX.Element} The rendered AuthModal component.
+ */
+const AuthModal = (props: AuthModalProps) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+
+  /**
+   * Handles the click event of the close button.
+   */
   const handleClick = () => {
-    setShowModal(false);
+    props.setShowModal(false);
   };
 
+  /**
+   * Handles the form submission event.
+   *
+   * @param {FormEvent} e - The form submission event.
+   */
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-    if (isSignUp && password !== confirmPassword) {
-      setError("Passwords do not match!");
+    if (props.isSignUp && password !== confirmPassword) {
+      setError('Passwords do not match!');
     }
-    console.log("Make a post request to our database!");
+    console.log('Make a post request to our database!');
   };
 
   const formProps = {
@@ -35,20 +51,18 @@ const AuthModal = ({ setShowModal }: AuthModalProps) => {
     error,
     setError,
     handleSubmit,
+    isSignUp: props.isSignUp
   };
 
   return (
-    <div className="auth-modal">
+    <div className='auth-modal'>
       <CloseButton onClick={handleClick} />
-      <StyledButton as="h2">
-        {isSignUp ? "CREATE ACCOUNT" : "LOG IN"}
-      </StyledButton>
+      <h2>{props.isSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
       <p>
-        By clicking Log in, you agree to our terms. Learn how we process your
-        data in our privacypolicy.
+        By clicking Log In, you agree to our terms. Learn how we process your
+        data in our Privacy Policy and Cookie Policy.
       </p>
       <Form {...formProps} />
-      <hr />
       <h2>GET THE APP</h2>
     </div>
   );
