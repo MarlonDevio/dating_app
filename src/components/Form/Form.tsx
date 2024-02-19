@@ -1,26 +1,29 @@
 import "./Form.css";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+import { StyledSecondaryButton } from "../../styles/styledComponents";
 
-const Form = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted!");
-  };
+interface FormProps {
+  email: string;
+  setEmail: (email: string) => void;
+  password: string;
+  setPassword: (password: string) => void;
+  confirmPassword: string;
+  setConfirmPassword: (confirmPassword: string) => void;
+  error: string;
+  setError: (error: string) => void;
+  handleSubmit: (e: FormEvent) => void;
+}
 
-  console.log(email, password, confirmPassword);
-
+const Form = ({ ...FormProps }: FormProps) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={"form"} onSubmit={FormProps.handleSubmit}>
       <input
         type="email"
         id="email"
         name="email"
         placeholder="email"
         required={true}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => FormProps.setEmail(e.target.value)}
       />
       <input
         type="password"
@@ -28,16 +31,19 @@ const Form = () => {
         name="password"
         placeholder="password"
         required={true}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => FormProps.setPassword(e.target.value)}
       />
       <input
-        type="password-check"
+        type="password"
         id="password-check"
         name="password-check"
         placeholder="confirm password"
         required={true}
-        onChange={(e) => setConfirmPassword(e.target.value)}
+        onChange={(e) => FormProps.setConfirmPassword(e.target.value)}
       />
+
+      <StyledSecondaryButton as="input" type="submit" />
+      <p>{FormProps.error}</p>
     </form>
   );
 };
